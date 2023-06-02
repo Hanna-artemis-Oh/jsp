@@ -14,6 +14,7 @@
     <%
 	    // DB에 연결
 	    JDBConnect jdbc = new JDBConnect();
+    	
 	    
 	    // 테스트용 입력값 준비 
 	    String id = "test1";
