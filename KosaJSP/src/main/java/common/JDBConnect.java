@@ -79,6 +79,7 @@ public class JDBConnect {
 			if (conn != null) {
 				conn.close();
 			}
+			System.out.println("JDBC 자원해제");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
