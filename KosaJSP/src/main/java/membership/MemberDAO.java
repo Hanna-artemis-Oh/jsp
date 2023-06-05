@@ -1,5 +1,6 @@
 package membership;
 
+import javax.servlet.ServletContext;
 import common.JDBConnect;
 
 public class MemberDAO {
@@ -10,9 +11,13 @@ public class MemberDAO {
 		jdbc = new JDBConnect(drv, url, id, pw);
 	}
 	
+	public MemberDAO(ServletContext application) {
+		jdbc = new JDBConnect(application);
+	}
+	
 	public MemberDTO getMemberDTO(String uid, String upass) {
 		MemberDTO dto = new MemberDTO();
-		String query = "SELECT * FROM member WHERE id=? AND pass=?";
+		String query = "SELECT * FROM members WHERE id=? AND pass=?";
 		
 		try {
 			jdbc.psmt = jdbc.conn.prepareStatement(query);
