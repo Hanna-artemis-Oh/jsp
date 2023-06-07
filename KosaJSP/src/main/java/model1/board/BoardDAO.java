@@ -177,4 +177,47 @@ public class BoardDAO {
 		
 		return result;
 	}
+	
+	public List<BoardDTO> selectListPage(Map<String, Object> map) {
+		List<BoardDTO> bbs = new Vector<BoardDTO>();
+		
+		String query = "";
+		query += "SELECT * "
+			   + "FROM (SELECT ROWNUM AS rn, p.*"
+			   + "      FROM (SELECT *"
+			   + "            FROM boards"
+			   + "            WHERE 1 = 1 ";
+		if (map.get("searchWord") != null) {
+			query += " AND " + map.get("searchField") 
+				   + " LIKE '%" + map.get("searchWord") + "%' ";
+		}
+		
+		query += "      ORDER BY num DESC"
+			   + "      ) p "
+			   + ") "
+			   +"WHERE rn BETWEEN ? AND ?";
+		try {
+			jdbc.psmt = jdbc.conn.prepareStatement(query);
+			jdbc.psmt.setString(1, map.get("start").toString());
+			jdbc.psmt.setString(2, map.get("end").toString());
+			
+			jdbc.rs = jdbc.psmt.executeQuery();
+			
+			while (jdbc.rs.next()) {
+				BoardDTO dto = new BoardDTO();
+				dto.setNum(jdbc.rs.getString("num"));
+				dto.setTitle(jdbc.rs.getString("title"));
+				dto.setContent(jdbc.rs.getString("content"));
+				dto.setPostdate(jdbc.rs.getDate("postdate"));
+				dto.setId(jdbc.rs.getString("id"));
+				dto.setVisitcount(jdbc.rs.getString("visitcount"));
+				bbs.add(dto);
+			}
+		} catch (Exception e) {
+			System.out.println("게시물 조회 중 예외 발생");
+			e.printStackTrace();
+		}
+		
+		return bbs;
+	}
 }

@@ -31,6 +31,14 @@
 		<param-name>OraclePwd</param-name>
 		<param-value>0359</param-value>
 	</context-param>
+	<context-param>
+		<param-name>POSTS_PER_PAGE</param-name>
+		<param-value>10</param-value>
+	</context-param>
+	<context-param>
+		<param-name>PAGES_PER_BLOCK</param-name>
+		<param-value>10</param-value>
+	</context-param>
 	
 <!--   <error-page>
   	<error-code>404</error-code>
