@@ -164,7 +164,7 @@ public class BoardDAO {
 		int result = 0;
 		
 		try {
-			String query = "DELETE FROM boards WHERE num=?";
+			String query = "DELETE boards WHERE num=?";
 			
 			jdbc.psmt = jdbc.conn.prepareStatement(query);
 			jdbc.psmt.setString(1, dto.getNum());
