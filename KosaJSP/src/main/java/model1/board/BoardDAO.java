@@ -69,4 +69,27 @@ public class BoardDAO {
 		
 		return bbs;
 	}
+	
+	public int insertWrite(BoardDTO dto) {
+		int result = 0;
+		
+		try {
+			String query = "INSERT INTO boards ( "
+						 + "num, title, content, id, visitcount) "
+						 + "VALUES ( "
+						 + "seq_board_num.NEXTVAL, ?, ?, ?, 0)";
+			
+			jdbc.psmt = jdbc.conn.prepareStatement(query);
+			jdbc.psmt.setString(1, dto.getTitle());
+			jdbc.psmt.setString(2, dto.getContent());
+			jdbc.psmt.setString(3, dto.getId());
+			
+			result = jdbc.psmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("게시물 입력 중 예외 발생");
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
