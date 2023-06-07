@@ -159,4 +159,22 @@ public class BoardDAO {
 		
 		return result;
 	}
+	
+	public int deletePost(BoardDTO dto) {
+		int result = 0;
+		
+		try {
+			String query = "DELETE FROM boards WHERE num=?";
+			
+			jdbc.psmt = jdbc.conn.prepareStatement(query);
+			jdbc.psmt.setString(1, dto.getNum());
+			
+			result = jdbc.psmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("게시물 삭제 중 예외 발생");
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
