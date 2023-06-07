@@ -92,4 +92,49 @@ public class BoardDAO {
 		
 		return result;
 	}
+	
+	public BoardDTO selectView(String num) {
+		BoardDTO dto = new BoardDTO();
+		
+		String query = "SELECT b.*, m.name "
+					 + "FROM boards b JOIN members m "
+					 + "ON b.id = m.id "
+					 + "WHERE num=?";
+		
+		try {
+			jdbc.psmt = jdbc.conn.prepareStatement(query);
+			jdbc.psmt.setString(1, num);
+			jdbc.rs = jdbc.psmt.executeQuery();
+			
+			if (jdbc.rs.next()) {
+				dto.setNum(jdbc.rs.getString(1));
+				dto.setTitle(jdbc.rs.getString(2));
+				dto.setContent(jdbc.rs.getString("content"));
+				dto.setPostdate(jdbc.rs.getDate("postdate"));
+				dto.setId(jdbc.rs.getString("id"));
+				dto.setVisitcount(jdbc.rs.getString(6));
+				dto.setName(jdbc.rs.getString("name"));
+			}
+		} catch (Exception e) {
+			System.out.println("게시물 상세보기 중 예외 발생");
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+	
+	public void updateVisitCount(String num) {
+		String query = "UPDATE boards "
+					 + "SET visitcount=visitcount+1 "
+				     + "WHERE num=?";
+		
+		try {
+			jdbc.psmt = jdbc.conn.prepareStatement(query);
+			jdbc.psmt.setString(1, num);
+			jdbc.psmt.executeQuery();
+		} catch (Exception e) {
+			System.out.println("게시물 조회수 증가 중 예외 발생");
+			e.printStackTrace();
+		}
+	}
 }
