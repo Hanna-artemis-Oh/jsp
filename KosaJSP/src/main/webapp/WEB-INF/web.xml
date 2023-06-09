@@ -65,4 +65,13 @@
   	<filter-name>SetCharEncoding</filter-name>
   	<url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+  <servlet>
+  	<servlet-name>HelloServlet</servlet-name>
+  	<servlet-class>servlet.HelloServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>HelloServlet</servlet-name>
+  	<url-pattern>/13Servlet/HelloServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>
