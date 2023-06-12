@@ -16,7 +16,7 @@
 	}
 	
 	function sendMessage() {
-		chatWindow.innerHTML += "<div class'myMsg'>" + chatMessage.value + "</div>";
+		chatWindow.innerHTML += "<div class='myMsg'>" + chatMessage.value + "</div>";
 		webSocket.send(chatId + "|" + chatMessage.value);
 		chatMessage.value = "";
 		chatWindow.scrollTop = chatWindow.scrollHeight;
@@ -32,7 +32,7 @@
 		}
 	}
 	
-	webSocket.opopen = function(event) {
+	webSocket.onopen = function(event) {
 		chatWindow.innerHTML += "웹소켓 서버에 연결되었습니다.<br>";
 	};
 	
