@@ -39,6 +39,15 @@
 		<param-name>PAGES_PER_BLOCK</param-name>
 		<param-value>10</param-value>
 	</context-param>
+	<context-param>
+		<param-name>maxPostSize</param-name>
+		<param-value>1024000</param-value>
+	</context-param>
+	<context-param>
+		<param-name>CHAT_ADDR</param-name>
+		<param-value>ws://192.168.230.178:8081/KosaJSP</param-value>
+	</context-param>
+	
 	
 <!--   <error-page>
   	<error-code>404</error-code>
@@ -73,5 +82,21 @@
   <servlet-mapping>
   	<servlet-name>HelloServlet</servlet-name>
   	<url-pattern>/13Servlet/HelloServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>MVCBoardList</servlet-name>
+  	<servlet-class>model2.mvcboard.ListController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MVCBoardList</servlet-name>
+  	<url-pattern>/mvcboard/list.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>MVCBoardWrite</servlet-name>
+  	<servlet-class>model2.mvcboard.WriteController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MVCBoardWrite</servlet-name>
+  	<url-pattern>/mvcboard/write.do</url-pattern>
   </servlet-mapping>
 </web-app>
